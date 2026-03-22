@@ -2,7 +2,7 @@ import { useRef, useMemo } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Points, PointMaterial, Float, Sphere } from "@react-three/drei";
 import * as THREE from "three";
-import * as random from "maath/random/dist/maath-random.esm";
+import * as random from "maath/random/dist/maath-random.cjs";
 
 const Stars = (props: any) => {
   const ref = useRef<any>();
