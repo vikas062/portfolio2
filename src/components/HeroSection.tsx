@@ -3,6 +3,7 @@ import { ArrowDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import profilePhoto from "@/assets/profile-photo.jpg";
+import Background3D from "./Background3D";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,37 +83,24 @@ const HeroSection = () => {
 
   return (
     <section
+      id="hero"
       ref={containerRef}
       className="relative h-screen w-full bg-[hsl(var(--dark-section))] text-white overflow-hidden flex items-center justify-center m-0 p-0"
     >
-      {/* ── Animated Gradient Blobs ── */}
+      {/* ── 3D Background ── */}
+      <Background3D />
+
+      {/* ── Background Overlays ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Warm orange blob — top left */}
+        {/* Subtle grid overlay */}
         <div
-          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full animate-float-slow"
-          style={{ background: "radial-gradient(circle, rgba(255,120,50,0.12) 0%, transparent 70%)" }}
-        />
-        {/* Purple blob — bottom right */}
-        <div
-          className="absolute -bottom-40 -right-20 w-[700px] h-[700px] rounded-full animate-float-medium"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
-            background: "radial-gradient(circle, rgba(120,50,255,0.10) 0%, transparent 70%)",
-            animationDelay: "3s"
+            backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+            backgroundSize: "100px 100px"
           }}
         />
-        {/* Subtle cyan — center */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full opacity-30"
-          style={{ background: "radial-gradient(circle, rgba(0,180,220,0.04) 0%, transparent 60%)" }}
-        />
-        {/* Fine grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-            backgroundSize: "80px 80px"
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[hsl(var(--dark-section))]" />
       </div>
 
       {/* ── Background Watermark Text ── */}
