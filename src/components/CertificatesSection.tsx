@@ -170,7 +170,7 @@ const CertificateCard = ({
         <motion.div
             ref={cardRef}
             layoutId={`cert-card-container-${index}`}
-            className="bg-foreground/[0.02] backdrop-blur-xl rounded-[2.5rem] overflow-hidden cursor-pointer group flex flex-col h-full border border-foreground/10 shadow-2xl shadow-transparent hover:shadow-primary/5 relative"
+            className="bg-foreground/[0.02] backdrop-blur-md rounded-[2.5rem] overflow-hidden cursor-pointer group flex flex-col h-full border border-foreground/10 shadow-2xl shadow-transparent hover:shadow-primary/5 relative"
             onClick={onToggle}
             whileHover={{ y: -10, transition: { duration: 0.4, ease: "easeOut" } }}
         >
@@ -186,10 +186,10 @@ const CertificateCard = ({
                 <motion.img
                     src={cert.image}
                     alt={cert.title}
-                    className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] opacity-80 group-hover:opacity-100"
+                    className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] opacity-90 group-hover:opacity-100"
                     layoutId={`cert-card-image-${index}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-70" />
 
                 {/* Floating badge */}
                 <div className="absolute top-6 left-6 p-2 bg-background/50 backdrop-blur-md rounded-xl border border-foreground/10 text-foreground/80 z-20">
@@ -259,8 +259,8 @@ const ExpandedCertificateView = ({
                     </span>
                 </button>
 
-                {/* Central visual header */}
-                <div className="relative w-full h-[40vh] md:h-[50vh] flex items-center justify-center z-10 overflow-hidden bg-background">
+                {/* Central visual header - more compact */}
+                <div className="relative w-full h-[25vh] md:h-[30vh] flex items-center justify-center z-10 overflow-hidden bg-background">
                     <motion.div
                         className="w-full h-full relative"
                         layoutId={`cert-card-image-container-${index}`}
@@ -287,8 +287,8 @@ const ExpandedCertificateView = ({
                     </div>
                 </div>
 
-                {/* Content Details */}
-                <div className="relative z-20 flex-1 bg-background px-8 md:px-16 py-12 flex flex-col md:flex-row gap-12 lg:gap-24">
+                {/* Content Details - more compact */}
+                <div className="relative z-20 flex-1 bg-background px-6 md:px-12 py-8 md:py-10 flex flex-col md:flex-row gap-8 lg:gap-16">
 
                     {/* Left Column */}
                     <div className="md:w-1/2">
