@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import { Info, Github, ExternalLink, Sparkles } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Project3DVisual from "./Project3DVisual";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,15 +45,15 @@ const projects = [
     color: "primary" as const,
   },
   {
-    title: "Deadlock Detection System",
-    subtitle: "Contribution: Core Algorithms",
-    description: "A system that detects deadlocks in operating systems using resource allocation graphs.",
-    features: ["Resource allocation graph", "Deadlock detection algorithm", "OS concept implementation"],
-    tech: ["Python", "Algorithms", "Data Structures"],
-    github: "https://github.com/Kriti-kumari221/Deadlock-Detection",
-    demo: null,
-    image: "https://images.unsplash.com/photo-1555949963-aa79dcee57d5?auto=format&fit=crop&q=80",
-    infoText: "Algorithmic analysis of system resources",
+    title: "Sentiment Analysis",
+    subtitle: "NLP & Deep Learning",
+    description: "An intelligent platform that performs real-time sentiment extraction from textual data using advanced NLP techniques.",
+    features: ["Natural Language Processing", "Real-time Text Analysis", "Neural Network Model"],
+    tech: ["Python", "NLP", "TensorFlow", "React", "Scikit-Learn"],
+    github: "https://github.com/Kriti-kumari221/NLP/tree/main/Sentiment_Analysis",
+    demo: "https://nlp-one-gilt.vercel.app/",
+    image: "https://images.unsplash.com/photo-1599658880436-c61792e70672?auto=format&fit=crop&q=80",
+    infoText: "Deep learning model for behavioral analytics",
     color: "secondary" as const,
   }
 ];
@@ -116,7 +117,12 @@ const ProjectsSection = () => {
   }, [expandedIndex]);
 
   return (
-    <section id="projects" className="section-padding relative bg-background py-20 md:py-32" ref={containerRef}>
+    <section id="projects" className="section-padding relative bg-background py-20 md:py-32 overflow-hidden" ref={containerRef}>
+      {/* Ambient background glows */}
+      <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full blur-[180px] pointer-events-none opacity-20"
+        style={{ background: "radial-gradient(circle, hsl(var(--neon-blue)/0.2) 0%, transparent 70%)" }} />
+      <div className="absolute bottom-20 left-0 w-[400px] h-[400px] rounded-full blur-[140px] pointer-events-none opacity-15"
+        style={{ background: "radial-gradient(circle, hsl(var(--neon-purple)/0.2) 0%, transparent 70%)" }} />
       <div className="max-w-[1400px] mx-auto px-4 md:px-12 relative z-10">
 
         {/* Premium Header */}
@@ -131,6 +137,8 @@ const ProjectsSection = () => {
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight">
               Selected <span className="text-foreground/60 italic">Projects</span>
             </h2>
+            {/* Gradient underline */}
+            <div className="mt-4 w-20 h-[2px] rounded-full" style={{ background: "linear-gradient(90deg, hsl(var(--primary)), transparent)" }} />
           </div>
           <p className="text-foreground/60 text-lg md:text-xl max-w-lg tracking-wide leading-relaxed font-light border-l border-foreground/10 pl-6">
             A showcase of comprehensive software architectures, machine learning models, and fully-deployed applications built to solve complex problems.
@@ -182,7 +190,7 @@ const ProjectCard = ({
     <motion.div
       ref={cardRef}
       layoutId={`card-container-${index}`}
-      className="bg-foreground/[0.02] backdrop-blur-xl rounded-[2.5rem] overflow-hidden cursor-pointer group flex flex-col h-full border border-foreground/10 shadow-2xl shadow-transparent hover:shadow-primary/5 relative"
+      className="bg-foreground/[0.02] card-shimmer backdrop-blur-md rounded-[2.5rem] overflow-hidden cursor-pointer group flex flex-col h-full border border-foreground/10 shadow-2xl shadow-transparent hover:shadow-primary/5 hover:border-foreground/20 hover:-translate-y-2 relative transition-all duration-500"
       onClick={onToggle}
       whileHover={{ y: -10, transition: { duration: 0.4, ease: "easeOut" } }}
     >
@@ -194,13 +202,16 @@ const ProjectCard = ({
         className="w-full h-72 md:h-80 bg-foreground/5 relative overflow-hidden"
         layoutId={`card-image-container-${index}`}
       >
+        {/* 3D Visual Background */}
+        <Project3DVisual index={index} />
+        
         <motion.img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+          className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] relative z-10 opacity-70 group-hover:opacity-60"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-70 z-20" />
 
         {/* Floating tech tags on the image */}
         <div className="absolute top-6 left-6 flex flex-wrap gap-2 z-20 pointer-events-none">
@@ -274,8 +285,8 @@ const ExpandedProjectView = ({
           </span>
         </button>
 
-        {/* Central visual header */}
-        <div className="relative w-full h-[50vh] md:h-[60vh] flex items-center justify-center z-10 overflow-hidden">
+        {/* Central visual header - Made more compact */}
+        <div className="relative w-full h-[35vh] md:h-[40vh] flex items-center justify-center z-10 overflow-hidden">
           <motion.div
             className="w-full h-full relative"
             layoutId={`card-image-container-${index}`}
@@ -300,8 +311,8 @@ const ExpandedProjectView = ({
           </div>
         </div>
 
-        {/* Content Details */}
-        <div className="relative z-20 flex-1 bg-background px-8 md:px-16 py-12 md:py-20 flex flex-col md:flex-row gap-12 lg:gap-24">
+        {/* Content Details - Reduced padding */}
+        <div className="relative z-20 flex-1 bg-background px-6 md:px-12 py-8 md:py-12 flex flex-col md:flex-row gap-8 lg:gap-16">
 
           {/* Left Description Column */}
           <div className="md:w-1/2">
