@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "allowImportingTsExtensions": true,
+    "allowJs": true,
     "isolatedModules": true,
+    "noCheck": true,
     "jsx": "react-jsx",
     "lib": [
       "ES2020",
