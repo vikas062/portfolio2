@@ -1,6 +1,6 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Text, OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import { Float, Text, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
 const AIBrain = ({ position }: { position: [number, number, number] }) => {
@@ -27,14 +27,10 @@ const AIBrain = ({ position }: { position: [number, number, number] }) => {
             emissiveIntensity={0.5}
           />
         </mesh>
-        <Sphere args={[0.4, 32, 32]}>
-          <MeshDistortMaterial
-            color="#3b82f6"
-            speed={2}
-            distort={0.4}
-            radius={0.4}
-          />
-        </Sphere>
+        <mesh>
+          <sphereGeometry args={[0.4, 32, 32]} />
+          <meshStandardMaterial color="#3b82f6" transparent opacity={0.7} />
+        </mesh>
         <Text position={[0, -1.2, 0]} fontSize={0.2} color="#ffffff" anchorX="center" opacity={0.6}>
           Neural Engine
         </Text>

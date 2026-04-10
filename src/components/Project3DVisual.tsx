@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, MeshWobbleMaterial, TorusKnot, Sphere, Octahedron } from "@react-three/drei";
+import { Float } from "@react-three/drei";
 import * as THREE from "three";
 
 const ProjectObject = ({ index }: { index: number }) => {
@@ -17,43 +17,31 @@ const ProjectObject = ({ index }: { index: number }) => {
     switch (index % 4) {
       case 0:
         return (
-          <TorusKnot args={[1, 0.3, 128, 16]}>
-            <MeshDistortMaterial
-              color="#3b82f6"
-              speed={2}
-              distort={0.4}
-              radius={1}
-            />
-          </TorusKnot>
+          <mesh ref={meshRef}>
+            <torusKnotGeometry args={[1, 0.3, 128, 16]} />
+            <meshStandardMaterial color="#3b82f6" metalness={0.5} roughness={0.3} />
+          </mesh>
         );
       case 1:
         return (
-          <Sphere args={[1, 64, 64]}>
-            <MeshWobbleMaterial
-              color="#8b5cf6"
-              speed={3}
-              factor={0.6}
-            />
-          </Sphere>
+          <mesh ref={meshRef}>
+            <sphereGeometry args={[1, 64, 64]} />
+            <meshStandardMaterial color="#8b5cf6" wireframe transparent opacity={0.7} />
+          </mesh>
         );
       case 2:
         return (
-          <Octahedron args={[1, 0]}>
-            <meshStandardMaterial
-              color="#06b6d4"
-              wireframe
-            />
-          </Octahedron>
+          <mesh ref={meshRef}>
+            <octahedronGeometry args={[1, 0]} />
+            <meshStandardMaterial color="#06b6d4" wireframe />
+          </mesh>
         );
       default:
         return (
-          <TorusKnot args={[1, 0.2, 100, 16]}>
-            <meshStandardMaterial
-              color="#f59e0b"
-              metalness={0.8}
-              roughness={0.2}
-            />
-          </TorusKnot>
+          <mesh ref={meshRef}>
+            <torusKnotGeometry args={[1, 0.2, 100, 16]} />
+            <meshStandardMaterial color="#f59e0b" metalness={0.8} roughness={0.2} />
+          </mesh>
         );
     }
   };

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, MeshWobbleMaterial, Icosahedron, Octahedron, Box, Torus } from "@react-three/drei";
+import { Float } from "@react-three/drei";
 import * as THREE from "three";
 
 const BrainVisual = () => {
@@ -12,7 +12,8 @@ const BrainVisual = () => {
   });
   return (
     <Float speed={5} rotationIntensity={2} floatIntensity={2}>
-      <Icosahedron args={[1, 4]} ref={meshRef}>
+      <mesh ref={meshRef}>
+        <icosahedronGeometry args={[1, 4]} />
         <meshStandardMaterial
           color="#a855f7"
           wireframe
@@ -21,15 +22,10 @@ const BrainVisual = () => {
           emissive="#a855f7"
           emissiveIntensity={0.5}
         />
-      </Icosahedron>
+      </mesh>
       <mesh>
         <sphereGeometry args={[0.4, 32, 32]} />
-        <MeshDistortMaterial
-          color="#a855f7"
-          speed={3}
-          distort={0.4}
-          radius={0.4}
-        />
+        <meshStandardMaterial color="#a855f7" transparent opacity={0.6} />
       </mesh>
     </Float>
   );
@@ -40,16 +36,12 @@ const CodeVisual = () => {
     <Float speed={4} rotationIntensity={1.5} floatIntensity={1.5}>
       <mesh rotation={[Math.PI / 4, 0, 0]}>
         <octahedronGeometry args={[1, 0]} />
-        <meshStandardMaterial
-          color="#3b82f6"
-          wireframe
-          emissive="#3b82f6"
-          emissiveIntensity={0.5}
-        />
+        <meshStandardMaterial color="#3b82f6" wireframe emissive="#3b82f6" emissiveIntensity={0.5} />
       </mesh>
-      <Icosahedron args={[0.5, 1]} position={[0, 0, 0]}>
+      <mesh>
+        <icosahedronGeometry args={[0.5, 1]} />
         <meshStandardMaterial color="#3b82f6" transparent opacity={0.4} />
-      </Icosahedron>
+      </mesh>
     </Float>
   );
 };
@@ -58,17 +50,14 @@ const BackendVisual = () => {
   return (
     <Float speed={3} rotationIntensity={1} floatIntensity={2}>
       <group>
-        <Box args={[1, 1.2, 0.8]}>
-          <meshStandardMaterial
-            color="#10b981"
-            wireframe
-            emissive="#10b981"
-            emissiveIntensity={0.3}
-          />
-        </Box>
-        <Box args={[0.7, 0.9, 0.9]} position={[0, 0, 0]}>
+        <mesh>
+          <boxGeometry args={[1, 1.2, 0.8]} />
+          <meshStandardMaterial color="#10b981" wireframe emissive="#10b981" emissiveIntensity={0.3} />
+        </mesh>
+        <mesh>
+          <boxGeometry args={[0.7, 0.9, 0.9]} />
           <meshStandardMaterial color="#10b981" transparent opacity={0.2} />
-        </Box>
+        </mesh>
       </group>
     </Float>
   );
@@ -77,16 +66,14 @@ const BackendVisual = () => {
 const ToolsVisual = () => {
   return (
     <Float speed={4} rotationIntensity={1} floatIntensity={1}>
-      <Torus args={[0.8, 0.2, 16, 100]}>
-        <MeshWobbleMaterial
-          color="#f97316"
-          speed={2}
-          factor={0.4}
-        />
-      </Torus>
-      <Box args={[0.5, 0.5, 0.5]}>
+      <mesh>
+        <torusGeometry args={[0.8, 0.2, 16, 100]} />
+        <meshStandardMaterial color="#f97316" emissive="#f97316" emissiveIntensity={0.3} />
+      </mesh>
+      <mesh>
+        <boxGeometry args={[0.5, 0.5, 0.5]} />
         <meshStandardMaterial color="#f97316" wireframe />
-      </Box>
+      </mesh>
     </Float>
   );
 };
